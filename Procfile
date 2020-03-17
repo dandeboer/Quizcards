@@ -1,1 +1,1 @@
-web: gunicorn django-multiple-choice-dandeboer.wsgi
+web: gunicorn flashcards.wsgi
