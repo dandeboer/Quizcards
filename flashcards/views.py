@@ -7,7 +7,11 @@ from django.contrib.auth.decorators import login_required
 
 def home(request):
     decks = request.user.decks.all()
-    return render(request, 'flashcards/index.html', {'decks': decks})
+    card_num = []
+    for deck in decks:
+        card_num.append(len(deck.cards.all()))
+    
+    return render(request, 'flashcards/index.html', {'decks': decks, 'card_num': card_num})
 
 @login_required
 def deck_page(request):
@@ -38,5 +42,6 @@ def add_card(request):
 def deck_details(request, pk):
     deck = Deck.objects.get(pk=pk)
     deck_cards = Card.objects.filter(deck_id=pk)
-    return render(request, 'flashcards/deck-details.html', {'deck': deck, 'pk': pk, 'deck_cards': deck_cards})
+    length = len(deck_cards)
+    return render(request, 'flashcards/deck-details.html', {'deck': deck, 'pk': pk, 'deck_cards': deck_cards, 'length': length})
 

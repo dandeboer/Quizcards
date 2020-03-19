@@ -25,9 +25,16 @@
     <div class="deck">
         <h3>{{deck.title}}</h3>
         <p>{{deck.description}}</p>
-        <a href='{% url "deck-details" deck.pk %}'>{{ deck.pk }}</a>
+        {% for num in card_num %}
+        <p>There are {{ num }} cards in this deck</p>
+        {% endfor %}
+        <!-- <p>There are {{deck.cards.all}} cards in this deck</p> -->
+        <a href='{% url "deck-details" deck.pk %}'>View cards</a>
     </div>
     {% endfor %}
 
+    {% for card in card_num %}
+        <p>{{ card }}</p>
+    {% endfor %}
 </main>
 {% endblock content %}
