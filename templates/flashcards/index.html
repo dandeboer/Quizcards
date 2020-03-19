@@ -21,20 +21,23 @@
         <p>Add a Deck</p>
     </div>
 
-    {% for deck in decks %}
+    {% for deck in card_num %}
+        <div class='deck'>
+            {% for item in deck %}
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+            {% endfor %}
+            <p>There are {{ deck.1 }} cards in this deck</p>
+            <a href='http://127.0.0.1:8000/details/{{deck.0.pk}}'>View cards</a>
+        </div>
+    {% endfor %}
+
+    <!-- {% for deck in decks %}
     <div class="deck">
         <h3>{{deck.title}}</h3>
         <p>{{deck.description}}</p>
-        {% for num in card_num %}
-        <p>There are {{ num }} cards in this deck</p>
-        {% endfor %}
-        <!-- <p>There are {{deck.cards.all}} cards in this deck</p> -->
         <a href='{% url "deck-details" deck.pk %}'>View cards</a>
     </div>
-    {% endfor %}
-
-    {% for card in card_num %}
-        <p>{{ card }}</p>
-    {% endfor %}
+    {% endfor %} -->
 </main>
 {% endblock content %}

@@ -9,7 +9,7 @@ def home(request):
     decks = request.user.decks.all()
     card_num = []
     for deck in decks:
-        card_num.append(len(deck.cards.all()))
+        card_num.append([deck, len(deck.cards.all())])
     
     return render(request, 'flashcards/index.html', {'decks': decks, 'card_num': card_num})
 
