@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<a href='http://127.0.0.1:8000/'>back to home</a>
+<h2>{{ deck.title }}</h2>
+<h3>{{ deck.description }}</h3>
+{% for card in deck_cards %}
+<div class="deck">
+    <p>{{ card.question }}</p>
+    <p>{{ card.answer }}</p>
+</div>
+{% endfor %}
+{% endblock content %}

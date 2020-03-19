@@ -35,3 +35,8 @@ def add_card(request):
         card.save()
         return JsonResponse({'question': question, 'answer': answer, 'current-deck': current_deck.title,}, safe=False)
 
+def deck_details(request, pk):
+    deck = Deck.objects.get(pk=pk)
+    deck_cards = Card.objects.filter(deck_id=pk)
+    return render(request, 'flashcards/deck-details.html', {'deck': deck, 'pk': pk, 'deck_cards': deck_cards})
+

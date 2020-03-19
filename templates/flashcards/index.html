@@ -25,6 +25,7 @@
     <div class="deck">
         <h3>{{deck.title}}</h3>
         <p>{{deck.description}}</p>
+        <a href='{% url "deck-details" deck.pk %}'>{{ deck.pk }}</a>
     </div>
     {% endfor %}
 
