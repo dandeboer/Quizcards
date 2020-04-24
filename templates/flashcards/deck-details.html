@@ -2,15 +2,26 @@
 {% load static %}
 {% block meta %}<script src="{% static 'javascript/deck_details.js' %}" defer></script>{% endblock meta %}
 {% block content %}
-<a href='http://127.0.0.1:8000/'>back to home</a>
-<button id="quiz-button" type="button">Quiz Me!</button>
-<h2>{{ deck.title }}</h2>
-<h3>{{ deck.description }}</h3>
+
+<a href='/'>Back to home</a>
+<a href='/details/{{deck.pk}}/quiz/'>Quiz Me</a>
+<h2 id='test'>{{ deck.title }}</h2>
+<h3 id='test'>{{ deck.description }}</h3>
 <p>{{ length }} cards in deck</p>
+
 {% for card in deck_cards %}
-<div class="deck">
-    <p>{{ card.question }}</p>
-    <p>{{ card.answer }}</p>
+<div class='card-container'>
+
+    <div id='card' class='card'>
+
+        <div class='card-front'>{{card.question}}</div>
+
+        <div class='card-back'>{{card.answer}}</div>
+
+    </div>
 </div>
 {% endfor %}
+
+
+
 {% endblock content %}

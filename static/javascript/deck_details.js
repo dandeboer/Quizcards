@@ -1,7 +1,8 @@
-let quizButton = document.querySelector("#quiz-button")
+let cards = document.querySelectorAll('#card')
 
-quizButton.addEventListener('click', quiz)
-
-function quiz() {
-    console.log("quiz")
+for (let card of cards) {
+    card.addEventListener('click', function() {
+        card.classList.toggle('card')
+        card.classList.toggle('rotate')
+    })
 }

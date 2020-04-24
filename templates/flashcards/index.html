@@ -5,7 +5,7 @@
 <header class="header">
 
     <div class="title">
-        <h1>Flashcards</h1>
+        <h1>Quizcards</h1>
     </div>
 
     <div class="login-logout-div">
@@ -31,13 +31,6 @@
             <a href='http://127.0.0.1:8000/details/{{deck.0.pk}}'>View cards</a>
         </div>
     {% endfor %}
-
-    <!-- {% for deck in decks %}
-    <div class="deck">
-        <h3>{{deck.title}}</h3>
-        <p>{{deck.description}}</p>
-        <a href='{% url "deck-details" deck.pk %}'>View cards</a>
-    </div>
-    {% endfor %} -->
+    
 </main>
 {% endblock content %}

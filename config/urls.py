@@ -10,7 +10,9 @@ urlpatterns = [
     path('deck/', views.deck_page),
     path('deck/add/', views.add_deck),
     path('deck/card/', views.add_card),
-    path('details/<int:pk>/', views.deck_details, name='deck-details')
+    path('details/<int:pk>/', views.deck_details, name='deck-details'),
+    path('details/<int:pk>/quiz/', views.quiz_me),
+    path('details/<int:pk>/quiz/cards/', views.quiz_cards),
 ]
 
 if settings.DEBUG:

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block meta %} <script src="{% static 'javascript/quiz_me.js' %}" defer></script> {% endblock meta %}
+{% block content %}
+<h1>Hello world</h1>
+
+<!-- <div class='list-of-questions'>1, 2</div> -->
+
+<!-- {% for card in deck_cards %}
+<div class='card-container'>
+
+    <div id='card' class='card'>
+
+        <div class='card-front'>{{card.question}}</div>
+
+        <div class='card-back'>{{card.answer}}</div>
+
+    </div>
+
+</div>
+{% endfor %} -->
+<span id='deck-pk' class='hidden'>{{pk}}</span>
+
+<div id='quiz-container'></div>
+
+{% endblock content %}
