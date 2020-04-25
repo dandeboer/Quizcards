@@ -8,7 +8,7 @@ deckButtonForm.addEventListener('submit', e => {
     let deckDescription = document.querySelector("#deck-description")
     let data = {title: deckTitle.value, description: deckDescription.value}
     console.log(data)
-    fetch('http://127.0.0.1:8000/deck/add/', {
+    fetch('/deck/add/', {
         method: 'POST',
         headers: {'Content-type': 'application/json',},
         body: JSON.stringify(data)
@@ -51,9 +51,9 @@ addCard.addEventListener('submit', e => {
         questionInput.value = ""
         answerInput.value = ""
     })
-    // .catch((error) => {
-    //     console.error('Other JSON response ERROR')
-    // })
+    .catch((error) => {
+        console.error('Other JSON response ERROR')
+    })
 })
 
 function displayNewCard(cardData) {

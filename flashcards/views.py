@@ -4,10 +4,15 @@ from django.views.decorators.csrf import csrf_exempt
 import json
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
+import random
 
+@login_required
 def home(request):
     decks = request.user.decks.all()
-    return render(request, 'flashcards/index.html', {'decks': decks})
+    card_num = []
+    for deck in decks:
+        card_num.append([deck, len(deck.cards.all())])
+    return render(request, 'flashcards/index.html', {'decks': decks, 'card_num': card_num})
 
 @login_required
 def deck_page(request):
@@ -35,3 +40,22 @@ def add_card(request):
         card.save()
         return JsonResponse({'question': question, 'answer': answer, 'current-deck': current_deck.title,}, safe=False)
 
+def deck_details(request, pk):
+    deck = Deck.objects.get(pk=pk)
+    deck_cards = Card.objects.filter(deck_id=pk)
+    length = len(deck_cards)
+    return render(request, 'flashcards/deck-details.html', {'deck': deck, 'pk': pk, 'deck_cards': deck_cards, 'length': length})
+
+def quiz_me(request, pk):
+    deck = Deck.objects.get(pk=pk)
+    # print(test)
+    # random_test = random.sample(test, len(test))
+    return render(request, 'flashcards/quiz-me.html', {'deck': deck, 'pk': pk})
+
+def quiz_cards(request, pk):
+    deck_cards = list(Card.objects.filter(deck_id=pk))
+    random_cards = random.sample(deck_cards, len(deck_cards))
+    cards = {}
+    for card in random_cards:
+        cards.update({card.question: card.answer})
+    return JsonResponse(cards)

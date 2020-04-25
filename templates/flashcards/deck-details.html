@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block meta %}<script src="{% static 'javascript/deck_details.js' %}" defer></script>{% endblock meta %}
+{% block content %}
+
+<a href='/'>Back to home</a>
+<a href='/details/{{deck.pk}}/quiz/'>Quiz Me</a>
+<h2 id='test'>{{ deck.title }}</h2>
+<h3 id='test'>{{ deck.description }}</h3>
+<p>{{ length }} cards in deck</p>
+
+{% for card in deck_cards %}
+<div class='card-container'>
+
+    <div id='card' class='card'>
+
+        <div class='card-front'>{{card.question}}</div>
+
+        <div class='card-back'>{{card.answer}}</div>
+
+    </div>
+</div>
+{% endfor %}
+
+
+
+{% endblock content %}

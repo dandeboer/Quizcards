@@ -5,7 +5,7 @@
 <header class="header">
 
     <div class="title">
-        <h1>Flashcards</h1>
+        <h1>Quizcards</h1>
     </div>
 
     <div class="login-logout-div">
@@ -21,12 +21,16 @@
         <p>Add a Deck</p>
     </div>
 
-    {% for deck in decks %}
-    <div class="deck">
-        <h3>{{deck.title}}</h3>
-        <p>{{deck.description}}</p>
-    </div>
+    {% for deck in card_num %}
+        <div class='deck'>
+            {% for item in deck %}
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+            {% endfor %}
+            <p>There are {{ deck.1 }} cards in this deck</p>
+            <a href='http://127.0.0.1:8000/details/{{deck.0.pk}}'>View cards</a>
+        </div>
     {% endfor %}
-
+    
 </main>
 {% endblock content %}
