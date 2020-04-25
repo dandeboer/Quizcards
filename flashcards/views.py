@@ -58,5 +58,4 @@ def quiz_cards(request, pk):
     cards = {}
     for card in random_cards:
         cards.update({card.question: card.answer})
-    print(cards)
     return JsonResponse(cards)
