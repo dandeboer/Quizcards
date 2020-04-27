@@ -9,9 +9,9 @@
     </div>
 
     <div class="login-logout-div">
-        <p class="login-logout"><a  href="http://127.0.0.1:8000/accounts/logout/">logout</a></p>
-        <p class="login-logout"><a href="http://127.0.0.1:8000/accounts/login/">login</a></p>
-        <p class="login-logout"><a href="http://127.0.0.1:8000/accounts/register/">register</a></p>
+        <p class="login-logout"><a  href="/accounts/logout/">logout</a></p>
+        <p class="login-logout"><a href="/accounts/login/">login</a></p>
+        <p class="login-logout"><a href="/accounts/register/">register</a></p>
     </div>
 
 </header>
@@ -28,7 +28,7 @@
             <p>{{ item.description }}</p>
             {% endfor %}
             <p>There are {{ deck.1 }} cards in this deck</p>
-            <a href='http://127.0.0.1:8000/details/{{deck.0.pk}}'>View cards</a>
+            <a href='/details/{{deck.0.pk}}'>View cards</a>
         </div>
     {% endfor %}
     
