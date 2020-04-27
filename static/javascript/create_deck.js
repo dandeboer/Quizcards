@@ -38,7 +38,7 @@ addCard.addEventListener('submit', e => {
     let answerInput = document.querySelector("#answer-input")
     let data = {pk: window.pk, question: questionInput.value, answer: answerInput.value}
     console.log(data)
-    fetch('http://127.0.0.1:8000/deck/card/', {
+    fetch('/deck/card/', {
         method: 'POST',
         headers: {'Content-type': 'application.json',},
         body: JSON.stringify(data)
