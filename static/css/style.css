@@ -43,6 +43,10 @@
   display: none;
 }
 
+.visibility-hidden {
+  visibility: hidden;
+}
+
 .card-container {
   position: relative;
   height: 200px;
