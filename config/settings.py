@@ -47,7 +47,6 @@ INSTALLED_APPS = [
 
 
     # Third-party
-    'debug_toolbar',
     'django_extensions',
 
     # Project-specific
@@ -58,7 +57,6 @@ ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
 
 MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -135,8 +133,6 @@ STATICFILES_DIRS = [
 # Custom user model
 
 AUTH_USER_MODEL = 'users.User'
-
-# Debug toolbar config
 
 INTERNAL_IPS = [
     # ...
