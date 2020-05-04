@@ -5,6 +5,7 @@ let cardUp = true
 let markCorrect = document.querySelector('#mark-correct')
 let markIncorrect = document.querySelector('#mark-incorrect')
 let firstGeneration = true
+let completed = false
 let cardQuestion = document.querySelector('#card-question')
 let cardAnswer = document.querySelector('#card-answer')
 
@@ -29,7 +30,9 @@ function generateTest(cardData) {
     let currentAnswer = Object.values(cardData)[currentCard]
     let card = document.querySelector('#card')
 
-
+    if (completed === true) {
+        card.addEventListener('click', rotateCard)
+    }
 
     if (firstGeneration === true) {
         card.addEventListener('click', rotateCard)
@@ -113,6 +116,7 @@ function quizState(currentCard, currentQuestion, currentAnswer, card, rotateCard
         rotateCard()
         card.removeEventListener('click', rotateCard)
         cardQuestion.innerText = "Quiz complete"
+        completed = true
     }
     else {
         setCardText(currentQuestion, currentAnswer)
