@@ -48,9 +48,9 @@ def deck_details(request, pk):
 
 def quiz_me(request, pk):
     deck = Deck.objects.get(pk=pk)
-    # print(test)
-    # random_test = random.sample(test, len(test))
-    return render(request, 'flashcards/quiz-me.html', {'deck': deck, 'pk': pk})
+    deck_cards = Card.objects.filter(deck_id=pk)
+    length = len(deck_cards)
+    return render(request, 'flashcards/quiz-me.html', {'deck': deck, 'pk': pk, 'length': length})
 
 def quiz_cards(request, pk):
     deck_cards = list(Card.objects.filter(deck_id=pk))
