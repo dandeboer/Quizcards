@@ -2,8 +2,8 @@ let deckPk = document.querySelector('#deck-pk')
 let deckLength = document.querySelector('#deck-length')
 let restartButton = document.querySelector('#restart-button')
 let cardUp = true
-
-restartButton.addEventListener('click', restartQuiz)
+let markCorrect = document.querySelector('#mark-correct')
+let firstGeneration = true
 
 function getDeck() {
     fetch(`/details/${deckPk.textContent}/quiz/cards/`)
@@ -11,6 +11,7 @@ function getDeck() {
         .then(response => {
             window.deckData = response
             generateTest(response)
+
         })
         .catch((error) => {
             console.error(error)
@@ -18,42 +19,44 @@ function getDeck() {
 }
 
 function generateTest(cardData) {
-    let currentCard = 0
-    let numberCorrect = 0
-    let numberIncorrect = 0
+    currentCard = 0
+    numberCorrect = 0
+    numberIncorrect = 0
     let currentQuestion = Object.keys(cardData)[currentCard]
     let currentAnswer = Object.values(cardData)[currentCard]
-
-
     let card = document.querySelector('#card')
+
     card.addEventListener('click', rotateCard)
-    function rotateCard() {
-        card.classList.toggle('card')
-        card.classList.toggle('rotate')
-        cardUp = !cardUp
-
-    }
-
     setCardText(currentQuestion, currentAnswer)
 
-    let markCorrect = document.querySelector('#mark-correct')
-    markCorrect.addEventListener('click', function () {
-        numberCorrect += 1
-        currentCard += 1
-        currentQuestion = Object.keys(cardData)[currentCard]
-        currentAnswer = Object.values(cardData)[currentCard]
-        updateCI(numberCorrect, 'correct')
-        quizState(currentCard, currentQuestion, currentAnswer, card, rotateCard, cardData)
-    })
-    let markIncorrect = document.querySelector('#mark-incorrect')
-    markIncorrect.addEventListener('click', function () {
-        numberIncorrect += 1
-        currentCard += 1
-        currentQuestion = Object.keys(cardData)[currentCard]
-        currentAnswer = Object.values(cardData)[currentCard]
-        updateCI(numberIncorrect, 'incorrect')
-        quizState(currentCard, currentQuestion, currentAnswer, card, rotateCard, cardData)
-    })
+    if (firstGeneration === true) {
+        markCorrect.addEventListener('click', correctFunction)
+        function correctFunction() {
+            numberCorrect += 1
+            currentCard += 1
+            currentQuestion = Object.keys(cardData)[currentCard]
+            currentAnswer = Object.values(cardData)[currentCard]
+            updateCI(numberCorrect, 'correct')
+            quizState(currentCard, currentQuestion, currentAnswer, card, rotateCard, cardData)
+        }
+        let markIncorrect = document.querySelector('#mark-incorrect')
+        markIncorrect.addEventListener('click', incorrectFunction)
+        function incorrectFunction () {
+            numberIncorrect += 1
+            currentCard += 1
+            currentQuestion = Object.keys(cardData)[currentCard]
+            currentAnswer = Object.values(cardData)[currentCard]
+            updateCI(numberIncorrect, 'incorrect')
+            quizState(currentCard, currentQuestion, currentAnswer, card, rotateCard, cardData)
+        }
+    }
+    firstGeneration = false
+}
+
+function rotateCard() {
+    card.classList.toggle('card')
+    card.classList.toggle('rotate')
+    cardUp = !cardUp
 }
 
 function setCardText(question, answer) {
@@ -101,11 +104,16 @@ function restartQuiz() {
     let card = document.querySelector('#card')
     let numberOf = document.querySelector('#number-of')
     let resultsDisplay = document.querySelector('#results-display')
+    let correctDisplay = document.querySelector('#correct-display')
+    let incorrectDisplay = document.querySelector('#incorrect-display')
 
     resultsDisplay.classList.add('visibility-hidden')
     numberOf.innerText = "1"
     cardQuestion.innerText = ''
     cardAnswer.innerText = ''
+    card.removeEventListener('click', rotateCard)
+    correctDisplay.innerText = '0'
+    incorrectDisplay.innerText = '0'
 
     let arr = []
     let obj
@@ -114,13 +122,17 @@ function restartQuiz() {
         obj[key] = value
         arr.push(obj)
     }
-    console.log(arr)
-    shuffle(arr) 
-    console.log(arr)
-    // let shuffledDeckData = {}
-    // for (let item in arr) {
-    //     console.log(item)
-    // }
+    // console.log(arr)
+    shuffle(arr)
+    // console.log(arr)
+    let shuffledDeckData = {}
+    for (let item in arr) {
+        let currentItem = Object.entries(arr[item])
+        // console.log(currentItem[0][0])
+        // console.log(currentItem[0][1])
+        shuffledDeckData[currentItem[0][0]] = currentItem[0][1]
+    }
+    generateTest(shuffledDeckData)
     // if (cardUp == false) {
     //     card.classList.toggle('card')
     //     card.classList.toggle('rotate')
@@ -130,7 +142,6 @@ function restartQuiz() {
     // else {
 
     // }
-    // generateTest(deckData[0])
 }
 
 function shuffle(array) {
@@ -143,18 +154,7 @@ function shuffle(array) {
         array[randomIndex] = temporaryValue;
     }
     return array;
-    // array.sort( () => Math.random() - 0.5)
 }
 
 getDeck()
-
-// test = { 'thingy': 'bruh', 'this': 'a pain', 'why cant': 'this be simple' }
-// arr = []
-// let obj
-// for (let [key, value] of Object.entries(test)) {
-//     // console.log(`${key}: ${value}`);
-//     obj = {}
-//     obj[key] = value
-//     arr.push(obj)
-// }
-
+restartButton.addEventListener('click', restartQuiz)
