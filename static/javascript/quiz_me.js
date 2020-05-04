@@ -3,7 +3,10 @@ let deckLength = document.querySelector('#deck-length')
 let restartButton = document.querySelector('#restart-button')
 let cardUp = true
 let markCorrect = document.querySelector('#mark-correct')
+let markIncorrect = document.querySelector('#mark-incorrect')
 let firstGeneration = true
+let cardQuestion = document.querySelector('#card-question')
+let cardAnswer = document.querySelector('#card-answer')
 
 function getDeck() {
     fetch(`/details/${deckPk.textContent}/quiz/cards/`)
@@ -26,10 +29,11 @@ function generateTest(cardData) {
     let currentAnswer = Object.values(cardData)[currentCard]
     let card = document.querySelector('#card')
 
-    card.addEventListener('click', rotateCard)
-    setCardText(currentQuestion, currentAnswer)
+
 
     if (firstGeneration === true) {
+        card.addEventListener('click', rotateCard)
+        setCardText(currentQuestion, currentAnswer)
         markCorrect.addEventListener('click', correctFunction)
         function correctFunction() {
             numberCorrect += 1
@@ -39,15 +43,36 @@ function generateTest(cardData) {
             updateCI(numberCorrect, 'correct')
             quizState(currentCard, currentQuestion, currentAnswer, card, rotateCard, cardData)
         }
-        let markIncorrect = document.querySelector('#mark-incorrect')
         markIncorrect.addEventListener('click', incorrectFunction)
-        function incorrectFunction () {
+        function incorrectFunction() {
             numberIncorrect += 1
             currentCard += 1
             currentQuestion = Object.keys(cardData)[currentCard]
             currentAnswer = Object.values(cardData)[currentCard]
             updateCI(numberIncorrect, 'incorrect')
             quizState(currentCard, currentQuestion, currentAnswer, card, rotateCard, cardData)
+        }
+    }
+    else {
+        if (cardUp === false) {
+            rotateCard()
+            setTimeout(function () {
+                setCardText(currentQuestion, currentAnswer)
+            }, 200)
+        }
+        else {
+            markCorrect.classList.toggle('visibility-hidden')
+            markIncorrect.classList.toggle('visibility-hidden')
+            rotateCard()
+            setTimeout(function () {
+                rotateCard()
+                setTimeout(function () {
+                    markCorrect.classList.toggle('visibility-hidden')
+                    markIncorrect.classList.toggle('visibility-hidden')
+                    setCardText(currentQuestion, currentAnswer)
+                }, 200)
+            }, 400)
+
         }
     }
     firstGeneration = false
@@ -60,8 +85,6 @@ function rotateCard() {
 }
 
 function setCardText(question, answer) {
-    let cardQuestion = document.querySelector('#card-question')
-    let cardAnswer = document.querySelector('#card-answer')
     cardQuestion.innerText = question
     cardAnswer.innerText = answer
 }
@@ -89,7 +112,6 @@ function quizState(currentCard, currentQuestion, currentAnswer, card, rotateCard
         resultsDisplay.classList.remove('visibility-hidden')
         rotateCard()
         card.removeEventListener('click', rotateCard)
-        let cardQuestion = document.querySelector('#card-question')
         cardQuestion.innerText = "Quiz complete"
     }
     else {
@@ -99,9 +121,6 @@ function quizState(currentCard, currentQuestion, currentAnswer, card, rotateCard
 }
 
 function restartQuiz() {
-    let cardQuestion = document.querySelector('#card-question')
-    let cardAnswer = document.querySelector('#card-answer')
-    let card = document.querySelector('#card')
     let numberOf = document.querySelector('#number-of')
     let resultsDisplay = document.querySelector('#results-display')
     let correctDisplay = document.querySelector('#correct-display')
@@ -111,7 +130,6 @@ function restartQuiz() {
     numberOf.innerText = "1"
     cardQuestion.innerText = ''
     cardAnswer.innerText = ''
-    card.removeEventListener('click', rotateCard)
     correctDisplay.innerText = '0'
     incorrectDisplay.innerText = '0'
 
@@ -133,15 +151,6 @@ function restartQuiz() {
         shuffledDeckData[currentItem[0][0]] = currentItem[0][1]
     }
     generateTest(shuffledDeckData)
-    // if (cardUp == false) {
-    //     card.classList.toggle('card')
-    //     card.classList.toggle('rotate')
-    //     cardUp = !cardUp
-
-    // }
-    // else {
-
-    // }
 }
 
 function shuffle(array) {
