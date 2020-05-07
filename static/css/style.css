@@ -9,6 +9,10 @@
   display: flexbox;
 }
 
+.quizcards-header {
+  color: white;
+}
+
 .login-logout-div {
   display: flexbox;
   text-align: right;
@@ -16,6 +20,30 @@
 
 .login-logout {
   display: inline-block;
+  color: white;
+}
+
+.link1 {
+  color: white;
+}
+
+.button-link1 {
+  border: solid 2px;
+  color: black;
+  padding: 3px;
+  border-radius: 5px;
+  text-decoration: none;
+  background-color: white;
+
+}
+
+.home-link-button-container{
+  text-align: center;
+  padding-top: 10px;
+}
+
+.username {
+  font-weight: bold;
 }
 
 .add-button {
@@ -23,7 +51,10 @@
   width: 350px;
   height: 200px;
   margin: 5px;
-  background-color: lightblue;
+  background-color: #d8efff;
+  font-size: 2.5rem;
+  text-align: center;
+  line-height: 200px;
 }
 
 .deck {
@@ -31,10 +62,12 @@
   width: 350px;
   height: 200px;
   margin: 5px;
+  background-color: #9EBFDC;
+  text-align: center;
 }
 
 .header {
-  background-color: lightblue;
+  background-color: #1B5C9C;
   width: 100%;
   border-bottom: solid 2px;
 }
@@ -75,7 +108,7 @@
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  background: yellow;
+  background: #d8efff;
   border: solid 2px;
 }
 
@@ -84,16 +117,80 @@
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  background: orange;
+  background: #94cfed;
   border: solid 2px;
   transform: rotateY(180deg);
 }
 
-/* .list-of-questions {
-    border: solid 2px;
-    position: fixed;
-    bottom: 0;
-    right: 25%;
-    width: 100px;
-    height: 100px;
-} */
+.deck-creator {
+  text-align: center;
+}
+
+.deck-creator-text {
+  font-size: 1.3rem;
+}
+
+.deck-title-input {
+  border: solid 2px;
+  font-size: 1.3rem;
+  border-radius: 5px;
+  width: 75%;
+  max-width: 860px;
+  text-align: center;
+}
+
+.deck-description-input {
+  border: solid 2px;
+  font-size: 1.3rem;
+  border-radius: 5px;
+  width: 75%;
+  max-width: 860px;
+  text-align: center;
+  resize: none;
+  height: 100px;
+}
+
+.create-deck-button {
+  padding: 3px;
+  font-size: 16px;
+  border: solid 2px;
+  color: black;
+  border-radius: 5px;
+  text-align: center;
+  display: block;
+  margin:0 auto;
+  margin-top: 10px;
+}
+
+.add-card1 {
+  height: 200px;
+  width: 350px;
+  border: solid 2px;
+  display: inline-block;
+  background: #d8efff
+}
+
+.add-card2 {
+  height: 200px;
+  width: 350px;
+  border: solid 2px;
+  display: inline-block;
+  background: #94cfed
+}
+
+.card-textarea {
+  height: 180px;
+  width: 330px;
+  resize: none;
+  margin:9px;
+  font-size: 1rem;
+}
+
+.card-textarea-container {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.cards-div {
+  text-align: center;
+}
