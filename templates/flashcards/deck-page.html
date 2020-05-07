@@ -1,32 +1,62 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block meta %}<script src="{% static 'javascript/create_deck.js' %}" defer></script>{% endblock meta %}
+{% block meta %}
+<script src="{% static 'javascript/create_deck.js' %}" defer></script>{% endblock meta %}
 {% block content %}
-<div class="add-button" id="deck-button">
-    <form id="deck-button-form">
-        <p>Deck Title:
-            <input id="deck-title" type="text" required>
-        </p>
-        <p>Deck Description(optional):
-            <input id="deck-description" type="text">
-        </p>
-        <button type="submit">Create Deck</button>
+<div class="deck-creator" id="deck-button">
+    <form id="deck-form">
+        <p class='deck-creator-text'>Deck Title:</p>
+        <input class='deck-title-input' id="deck-title" type="text" required>
+        <p class='deck-creator-text'>Deck Description(optional):</p>
+        <textarea class='deck-description-input' id="deck-description"></textarea>
+        <button id='create-deck-button' class='create-deck-button' type="submit">Create Deck</button>
     </form>
 </div>
 
-<div id="add-card" class="hidden">
-    <form>
-        <p>Question:
-            <input id="question-input" type="text" required>
-        </p>
-        <p>Answer:
-            <input id="answer-input" type="text" required>
-        </p>
-        <button id="add-card-button" type="button">Add Card</button>
-    </form>
+<form id='card-form'>
+    <div class='card-textarea-container'>
+        <div id="add-card1" class="hidden">
+            <textarea id="question-input" class='card-textarea' placeholder='Question' required></textarea>
+        </div>
+        <div id="add-card2" class="hidden">
+            <textarea id="answer-input" class='card-textarea' placeholder='Answer' type="text" required></textarea>
+        </div>
+    </div>
+    <button id="add-card-button" class='hidden' type="button">Add Card</button>
+</form>
 </div>
 
-<div id="cards-div">
+<div id="cards-div" class='cards-div'>
+    <!-- <div class='card-container'>
 
+        <div id='card' class='card'>
+    
+            <div id='card-front' class='card-front'>
+                <p id='card-question'>test</p>
+            </div>
+            <div id='card-back' class='card-back'>
+                <p id='card-answer'>test</p>
+            </div>
+    
+        </div>
+    
+    </div> -->
 </div>
 {% endblock content %}
+
+<!-- `<div class='card-container'>
+
+    <div id='card' class='card'>
+
+        <div id='card-front' class='card-front'>
+            <p id='card-question'>${cardData.question}</p>
+        </div>
+        <div id='card-back' class='card-back'>
+            <p id='card-answer'>${cardData.answer}</p>
+        </div>
+
+    </div>
+
+</div>` -->
+
+<!-- `<div class='card-container'><div id='card' class='card'><div id='card-front' class='card-front'><p id='card-question'>${cardData.question}</p></div><div id='card-back' class='card-back'><p id='card-answer'>${cardData.answer}</p></div></div></div>` -->

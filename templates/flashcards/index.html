@@ -5,20 +5,19 @@
 <header class="header">
 
     <div class="title">
-        <h1>Quizcards</h1>
+        <h1 class='quizcards-header'>Quizcards</h1>
     </div>
 
     <div class="login-logout-div">
-        <p class="login-logout"><a  href="/accounts/logout/">logout</a></p>
-        <p class="login-logout"><a href="/accounts/login/">login</a></p>
-        <p class="login-logout"><a href="/accounts/register/">register</a></p>
+        <p class='login-logout'>Welcome back <span class='username'>{{request.user.username}}</span></p>
+        <p class="login-logout"><a class='link1' href="/accounts/logout/">logout</a></p>
     </div>
 
 </header>
 <main>
 
     <div class="add-button" id="deck-button">
-        <p>Add a Deck</p>
+        <p>Create A Deck</p>
     </div>
 
     {% for deck in card_num %}
@@ -28,7 +27,10 @@
             <p>{{ item.description }}</p>
             {% endfor %}
             <p>There are {{ deck.1 }} cards in this deck</p>
-            <a href='/details/{{deck.0.pk}}'>View cards</a>
+            <div class='home-link-button-container'>
+                <a class='button-link1' href='/details/{{deck.0.pk}}/'>View Cards</a>
+                <a class='button-link1' href='/details/{{deck.0.pk}}/quiz/'>Quiz Me!</a>
+            </div>
         </div>
     {% endfor %}
     

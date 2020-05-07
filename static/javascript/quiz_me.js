@@ -15,6 +15,8 @@ function getDeck() {
         .then(response => {
             window.deckData = response
             generateTest(response)
+            console.log(response)
+            console.log(deckData)
 
         })
         .catch((error) => {
