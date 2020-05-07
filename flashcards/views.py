@@ -57,5 +57,7 @@ def quiz_cards(request, pk):
     random_cards = random.sample(deck_cards, len(deck_cards))
     cards = {}
     for card in random_cards:
-        cards.update({card.question: card.answer})
+        # cards.update({card.question: card.answer})
+        cards[card.question] = card.answer
+    print(cards)
     return JsonResponse(cards)
